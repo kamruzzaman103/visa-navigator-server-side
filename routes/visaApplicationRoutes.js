@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const VisaApplication = require('../models/VisaApplication');
 
-// Submit a new visa application
+
 router.post('/', async (req, res) => {
   const {country, countryImage, visaType, processingTime, validity, applicationMethod, firstName, lastName, email, appliedDate, fee, visaId } = req.body;
 
@@ -31,11 +31,11 @@ router.post('/', async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const { email } = req.query; // Extract email from query parameters
+    const { email } = req.query; 
     if (!email) {
       return res.status(400).json({ error: "Email query parameter is required" });
     }
-    // Query the database for applications that match the provided email
+    
     const applications = await VisaApplication.find({ email });
     res.json(applications);
   } catch (error) {
