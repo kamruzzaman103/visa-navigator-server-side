@@ -32,4 +32,23 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedVisa = await Visa.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedVisa);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update visa", error });
+  }
+});
+
+// Delete a visa
+router.delete("/:id", async (req, res) => {
+  try {
+    await Visa.findByIdAndDelete(req.params.id);
+    res.json({ message: "Visa deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete visa", error });
+  }
+});
+
 module.exports = router;
