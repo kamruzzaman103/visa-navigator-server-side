@@ -23,4 +23,13 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const visas = await Visa.find();
+    res.status(200).json(visas);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch visas", error });
+  }
+});
+
 module.exports = router;
