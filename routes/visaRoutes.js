@@ -13,4 +13,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/", async (req, res) => {
+  try {
+    const visa = new Visa(req.body);
+    await visa.save();
+    res.status(201).json({ message: "Visa added successfully!", visa });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to add visa", error });
+  }
+});
+
 module.exports = router;
